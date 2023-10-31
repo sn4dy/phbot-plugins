@@ -34,7 +34,7 @@ QtBind.createLabel(gui, "ntfy Topic Name:", 6, 50)
 leNtfyTopic = QtBind.createLineEdit(gui, "", 6, 70, 145, 19)
 btnSaveConfig = QtBind.createButton(gui, "saveConfigs", "Save Changes", 6, 90)
 
-QtBind.createLineEdit(gui,"",169,10,1,262) # Separator
+QtBind.createLineEdit(gui, "", 169, 10, 1, 262) # Separator
 
 _x = 180
 _y = 10
