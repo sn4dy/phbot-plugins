@@ -1,15 +1,12 @@
 from phBot import *
 import QtBind
-from datetime import datetime
 from threading import Timer
 import urllib.request
 import urllib.parse
 import struct
 import json
-import time
 import os
 import re
-import requests
 
 pName = 'sNtfy'
 pVersion = '0.0.2'
@@ -800,7 +797,10 @@ def ntfyPush(message, title="", tags=[], priority=3):
         data["title"] = title
     if tags:
         data["tags"] = tags
-    requests.post(ntfyAddr, data = json.dumps(data).encode())
+    headers = {
+        'Content-Type': 'application/json',
+    }
+    _ = urllib.request.urlopen(ntfyAddr, headers=headers, data = json.dumps(data).encode())
 
 
 # Plugin loaded
