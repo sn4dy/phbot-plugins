@@ -9,7 +9,7 @@ import os
 import re
 
 pName = 'sNtfy'
-pVersion = '0.0.2'
+pVersion = '0.0.3'
 pUrl = 'https://raw.githubusercontent.com/sn4dy/phbot-plugins/master/sNtfy.py'
 
 NTFY_DEFAULT_SERVER = 'https://ntfy.sh/'
