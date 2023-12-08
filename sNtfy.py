@@ -1,3 +1,4 @@
+from urllib.error import URLError
 from phBot import *
 import QtBind
 from threading import Timer
@@ -9,7 +10,7 @@ import os
 import re
 
 pName = 'sNtfy'
-pVersion = '0.0.3'
+pVersion = '0.0.4'
 pUrl = 'https://raw.githubusercontent.com/sn4dy/phbot-plugins/master/sNtfy.py'
 
 NTFY_DEFAULT_SERVER = 'https://ntfy.sh/'
@@ -58,6 +59,7 @@ eventMessageCThief = QtBind.createCheckBox(gui, "doNothing", "Consignment Thief"
 _y += 20
 
 _x += 275
+_y = 10
 
 eventNearGM = QtBind.createCheckBox(gui, "doNothing", "GM near to you", _x, _y)
 _y += 20
@@ -110,6 +112,7 @@ eventMessageGM = QtBind.createCheckBox(gui_, "doNothing", "GM Talk", _x, _y)
 _y += 20
 
 _x += 195
+_y = 10
 
 eventPartyJoined = QtBind.createCheckBox(gui_, "doNothing", "Party joined", _x, _y)
 _y += 20
@@ -786,7 +789,7 @@ def notify_pickup(itemID): # for vSRO
 def ntfy(message, title="", tags=[], priority=3):
     if not ntfyServer or not ntfyTopic:
         return
-    Timer(0.001, ntfyPush,(message,title, tags, priority)).start()
+    Timer(0.001, ntfyPush, (message, title, tags, priority)).start()
 
 def ntfyPush(message, title="", tags=[], priority=3):
     ntfyAddr = ntfyServer
@@ -800,7 +803,10 @@ def ntfyPush(message, title="", tags=[], priority=3):
     headers = {
         'Content-Type': 'application/json',
     }
-    _ = urllib.request.urlopen(ntfyAddr, headers=headers, data = json.dumps(data).encode())
+    try:
+        _ = urllib.request.urlopen(ntfyAddr, headers=headers, data = json.dumps(data).encode())
+    except urllib.error.URLError as e:
+        log('Error sending notification: ' + str(e.reason))
 
 
 # Plugin loaded
