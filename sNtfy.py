@@ -1,4 +1,3 @@
-from urllib.error import URLError
 from phBot import *
 import QtBind
 from threading import Timer
