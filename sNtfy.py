@@ -7,9 +7,12 @@ import struct
 import json
 import os
 import re
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 pName = 'sNtfy'
-pVersion = '0.0.4'
+pVersion = '0.0.5'
 pUrl = 'https://raw.githubusercontent.com/sn4dy/phbot-plugins/master/sNtfy.py'
 
 NTFY_DEFAULT_SERVER = 'https://ntfy.sh/'
@@ -785,25 +788,21 @@ def notify_pickup(itemID): # for vSRO
 		sox = getSoXText(item['servername'],item['level'])
 		ntfy("Item picked up "+item['name']+(' '+race if race else '')+(' '+genre if genre else '')+(' '+sox if sox else ''), character_data['name'], ["gift"])
 
-def ntfy(message, title="", tags=[], priority=3):
+def ntfy(message, title="sNtfy", tags=['warning'], priority=3):
     if not ntfyServer or not ntfyTopic:
         return
     Timer(0.001, ntfyPush, (message, title, tags, priority)).start()
 
-def ntfyPush(message, title="", tags=[], priority=3):
+def ntfyPush(message, title, tags, priority):
     ntfyAddr = ntfyServer
     if ntfyAddr[-1] != '/':
         ntfyAddr += '/'
-    data = {"message": message, "priority": priority}
-    if title:
-        data["title"] = title
-    if tags:
-        data["tags"] = tags
-    headers = {
-        'Content-Type': 'application/json',
-    }
+    ntfyAddr = ntfyAddr + ntfyTopic
+    tags = ','.join(tags)
+    headers = {"Title": title, "Priority": priority, "Tags": tags}
     try:
-        _ = urllib.request.urlopen(ntfyAddr, headers=headers, data = json.dumps(data).encode())
+        req = urllib.request.Request(ntfyAddr, headers=headers, data = json.dumps(message).encode())
+        resp = urllib.request.urlopen(req)
     except urllib.error.URLError as e:
         log('Error sending notification: ' + str(e.reason))
 
