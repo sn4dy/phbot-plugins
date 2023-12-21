@@ -82,7 +82,7 @@ eventMessageQuest = QtBind.createCheckBox(gui, "doNothing", "Quest Completed", _
 _y += 20
 eventBotAlchemy = QtBind.createCheckBox(gui, "doNothing", "Alchemy Completed", _x, _y)
 _y += 20
-eventMessageItemSold = QtBind.createCheckBox(gui, "doNothing", "Alchemy Completed", _x, _y)
+eventMessageItemSold = QtBind.createCheckBox(gui, "doNothing", "Item Sold", _x, _y)
 _y += 20
 
 configPage1={'eventCharacterConnected':eventCharacterConnected,'eventCharacterDisconnected':eventCharacterDisconnected,'eventMessageUniqueSpawned':eventMessageUniqueSpawned,'eventMessageUniqueKilled':eventMessageUniqueKilled,'eventMessageCTF':eventMessageCTF,'eventMessageBA':eventMessageBA,'eventMessageFortress':eventMessageFortress,'eventMessageCHunter':eventMessageCHunter,'eventMessageCThief':eventMessageCThief,'eventNearGM':eventNearGM,'eventNearUnique':eventNearUnique,'eventNearHunter':eventNearHunter,'eventNearThief':eventNearThief,'eventCharacterAttacked':eventCharacterAttacked,'eventCharacterDied':eventCharacterDied,'eventMountDied':eventMountDied,'eventMessageQuest':eventMessageQuest,'eventBotAlchemy':eventBotAlchemy,'eventMessageItemSold':eventMessageItemSold}
