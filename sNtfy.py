@@ -12,7 +12,7 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 pName = 'sNtfy'
-pVersion = '0.0.5'
+pVersion = '0.0.6'
 pUrl = 'https://raw.githubusercontent.com/sn4dy/phbot-plugins/master/sNtfy.py'
 
 NTFY_DEFAULT_SERVER = 'https://ntfy.sh/'
